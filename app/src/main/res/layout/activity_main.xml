@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="placeVM"
+            type="com.sunnyweather.android.ui.viewmodel.PlaceViewModel" />
+
+        <variable
+            name="WeatherVm"
+            type="com.sunnyweather.android.ui.viewmodel.WeatherViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/place_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/place_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+
+</layout>
