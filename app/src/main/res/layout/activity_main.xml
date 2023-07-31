@@ -9,21 +9,19 @@
             name="placeVM"
             type="com.sunnyweather.android.ui.viewmodel.PlaceViewModel" />
 
-        <variable
-            name="WeatherVm"
-            type="com.sunnyweather.android.ui.viewmodel.WeatherViewModel" />
     </data>
 
-    <LinearLayout
-        android:id="@+id/place_ll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <fragment
+
+
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/place_fragment"
+            android:name="com.sunnyweather.android.ui.fragment.PlaceFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_place" />
+
+
 
 
 </layout>

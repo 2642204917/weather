@@ -14,20 +14,21 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-        <androidx.appcompat.widget.SearchView
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/search_place"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/searchview_bg"
-            app:defaultQueryHint="请输入地区"
-            app:iconifiedByDefault="false"
-            app:queryBackground="@null"
-            app:searchIcon="@null" />
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:paddingHorizontal="@dimen/search_padding_horizontal_10"
+            android:text="@={placeVM.query}"
+            app:query="@{placeVM::query}" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/place_item"
+            android:id="@+id/place_rv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 </layout>

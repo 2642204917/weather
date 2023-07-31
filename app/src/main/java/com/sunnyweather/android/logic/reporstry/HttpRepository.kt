@@ -7,12 +7,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object HttpRepository : ApiRepository {
 
-    private const val url = ""
-    val retrofit =
+    private const val url = "https://api.caiyunapp.com/"
+
+
+    private val retrofit =
         Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create()).build()
 
-    val httpService = retrofit.create(NetInterface::class.java)
+    private val httpService = retrofit.create(NetInterface::class.java)
 
 
-
+    suspend fun startQuery(query: String) = runCatching {
+        httpService.searchPlaces(query).places
+    }
 }

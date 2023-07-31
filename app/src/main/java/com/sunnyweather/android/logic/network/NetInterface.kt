@@ -10,5 +10,5 @@ interface NetInterface {
 
 
     @GET("v2/place?token=${Token}&lang=zh_CN")
-    suspend fun searchPlaces(@Query("query") query: String): Result<PlaceResponseBean>
+    suspend fun searchPlaces(@Query("query") query: String): PlaceResponseBean
 }

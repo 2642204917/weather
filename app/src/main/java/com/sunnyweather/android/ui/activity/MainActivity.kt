@@ -6,10 +6,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.sunnyweather.android.R
 import com.sunnyweather.android.databinding.ActivityMainBinding
+import com.sunnyweather.android.logic.ShowToast
 import com.sunnyweather.android.ui.base.BaseActivity
 import com.sunnyweather.android.ui.viewmodel.PlaceViewModel
 
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+class MainActivity : BaseActivity() {
 
 
     private val viewModelProvider by lazy { ViewModelProvider(this) }
@@ -17,15 +18,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private val placeViewModel: PlaceViewModel by lazy { viewModelProvider[PlaceViewModel::class.java] }
 
 
-    override fun getLayoutId(): Int = R.layout.activity_main
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
+        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).also {
 
-    override fun initView() {
+            it.lifecycleOwner = this
+
+observeContext(placeViewModel._contextEvent)
+        }
+
 
     }
 
-    override fun initData() {
-        binding.placeVM = placeViewModel
 
-    }
 }

@@ -7,35 +7,30 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.LiveData
 import androidx.viewbinding.ViewBinding
 import com.sunnyweather.android.R
+import com.sunnyweather.android.logic.ContextEvent
+import com.sunnyweather.android.logic.ContextEventListener
+import com.sunnyweather.android.logic.ContextEventObserver
+import com.sunnyweather.android.logic.ShowToast
 
-abstract class BaseFragment<DB : ViewDataBinding> : DialogFragment() {
-    lateinit var binding: DB
+abstract class BaseFragment : DialogFragment(), ContextEventListener {
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val bind = DataBindingUtil.inflate<DB>(
-            inflater,
-            getLayoutId(),
-            container,
-            false
-        ).also {
+    private val mContextEventObserver by lazy { ContextEventObserver(this) }
 
-            it.lifecycleOwner = this
+    protected fun observeContext(event: LiveData<ContextEvent>) {
+        event.observe(this, mContextEventObserver)
+    }
 
-            binding = it
-        }.root
-        return bind
+    override fun showToast(event: ShowToast) {
+        getActivityListener()?.showToast(event)
     }
 
 
-    protected abstract fun getLayoutId(): Int
+    private fun getActivityListener(): ContextEventListener? =
+        requireActivity() as? ContextEventListener
 
-    protected abstract fun initView()
-    protected abstract fun initData()
+
 }
