@@ -11,7 +11,7 @@ import com.sunnyweather.android.logic.model.Place
 
 class PlaceAdapter(var placeList: List<Place>) : RecyclerView.Adapter<PlaceAdapter.ViewHolder>() {
 
-
+    var onClick: ((Place) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ItemPlaceBinding.inflate(
@@ -27,15 +27,15 @@ class PlaceAdapter(var placeList: List<Place>) : RecyclerView.Adapter<PlaceAdapt
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val bean = placeList[position]
-
-
         holder.binding.placeBean = bean
 
+        holder.itemView.setOnClickListener {
+            onClick?.invoke(bean)
+
+        }
     }
 
-    class ViewHolder(val binding: ItemPlaceBinding) : RecyclerView.ViewHolder(binding.root) {
-
-    }
+    class ViewHolder(val binding: ItemPlaceBinding) : RecyclerView.ViewHolder(binding.root)
 }
 
 

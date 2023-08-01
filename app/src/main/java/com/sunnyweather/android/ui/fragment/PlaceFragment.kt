@@ -18,9 +18,9 @@ import com.sunnyweather.android.ui.base.BaseFragment
 import com.sunnyweather.android.ui.viewmodel.PlaceViewModel
 
 class PlaceFragment : BaseFragment() {
-    private val viewModelProvider by lazy {  ViewModelProvider(this)}
+    private val viewModelProvider by lazy { ViewModelProvider(this) }
 
-    private val placeViewModel: PlaceViewModel  by lazy {   viewModelProvider[PlaceViewModel::class.java]}
+    private val placeViewModel: PlaceViewModel by lazy { viewModelProvider[PlaceViewModel::class.java] }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,10 +29,10 @@ class PlaceFragment : BaseFragment() {
 
         val binding = FragmentPlaceBinding.inflate(inflater, container, false).also {
             it.lifecycleOwner = requireActivity()
-            it.placeVM=placeViewModel
+            it.placeVM = placeViewModel
             it.setUpItem()
         }.root
-observeContext(placeViewModel._contextEvent)
+        observeContext(placeViewModel._contextEvent)
         return binding
     }
 
@@ -54,9 +54,8 @@ observeContext(placeViewModel._contextEvent)
             }
 
         }
-
+        placeAdapter.onClick = placeViewModel::savePlace
         placeRv.adapter = placeAdapter
-
 
     }
 

@@ -25,7 +25,7 @@ class MainActivity : BaseActivity() {
 
             it.lifecycleOwner = this
 
-observeContext(placeViewModel._contextEvent)
+            observeContext(placeViewModel._contextEvent)
         }
 
 

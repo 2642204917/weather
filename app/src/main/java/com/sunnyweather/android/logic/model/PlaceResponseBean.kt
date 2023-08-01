@@ -6,7 +6,7 @@ data class PlaceResponseBean(val status: String, val query: String, val places: 
 data class Place(
     val id: String,
     val name: String,
-    val formatted_address: String,
+    val formattedAddress: String,
     val location: Location
 )
 
