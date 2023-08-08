@@ -1,7 +1,13 @@
 package com.sunnyweather.android.logic
 
+import android.os.Bundle
 import android.widget.Toast
+import androidx.annotation.IdRes
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
+import androidx.navigation.NavArgs
+import androidx.navigation.NavOptions
+import com.sunnyweather.android.ui.base.BaseFragment
 import java.lang.ref.WeakReference
 
 sealed class ContextEvent {
@@ -17,9 +23,15 @@ data class ShowToast(val text: String, val duration: Int) : ContextEvent() {
     }
 }
 
+data class ShowFragment(val fragment: BaseFragment, val tag: String?) : ContextEvent()
+
+data class Navigate(@IdRes val resId: Int, var args: Bundle?, var navOptions: NavOptions?) :
+    ContextEvent()
 
 interface ContextEventListener {
     fun showToast(event: ShowToast)
+    fun showFragment(event: ShowFragment)
+    fun navigate(event: Navigate)
 
 }
 
@@ -32,6 +44,8 @@ class ContextEventObserver(listener: ContextEventListener) : Observer<ContextEve
 
         when (value) {
             is ShowToast -> listener.showToast(value)
+            is ShowFragment -> listener.showFragment(value)
+            is Navigate -> listener.navigate(value)
         }
     }
 

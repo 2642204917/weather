@@ -1,16 +1,23 @@
 package com.sunnyweather.android.ui.viewmodel
 
+import android.os.Bundle
+import androidx.annotation.IdRes
 import androidx.annotation.MainThread
 import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavOptions
 import com.sunnyweather.android.logic.ContextEvent
+import com.sunnyweather.android.logic.Navigate
+import com.sunnyweather.android.logic.ShowFragment
 import com.sunnyweather.android.logic.ShowToast
 import com.sunnyweather.android.mApplication.Companion.application
+import com.sunnyweather.android.ui.base.BaseFragment
 
 open class BaseViewModel : ViewModel() {
 
-    protected val TAG = this.javaClass.simpleName
+    protected val TAG: String = this.javaClass.simpleName
     private val contextEvent = MutableLiveData<ContextEvent>()
     val _contextEvent = contextEvent
 
@@ -31,5 +38,18 @@ open class BaseViewModel : ViewModel() {
 
 
     }
+@Suppress("unused")
+    @MainThread
+    protected fun showFragment(clazz: Class<out BaseFragment>) {
 
+        val fragment = clazz.getConstructor().newInstance()
+        val event = ShowFragment(fragment, fragment.tag)
+        sendContextEvent(event)
+    }
+
+    @MainThread
+    protected fun navigate(@IdRes id: Int, args: Bundle?, options: NavOptions?) {
+
+        sendContextEvent(Navigate(id, args, options))
+    }
 }
