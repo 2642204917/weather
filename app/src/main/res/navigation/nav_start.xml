@@ -32,13 +32,20 @@
             app:destination="@id/nav_weatherFragment"
             app:popUpTo="@id/nav_placeFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_nav_placeFragment_to_nav_weatherFragment"
+            app:destination="@id/nav_weatherFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_weatherFragment"
         android:name="com.sunnyweather.android.ui.fragment.WeatherFragment"
         android:label="WeatherFragment"
 
-        tools:layout="@layout/fragment_weather" />
+        tools:layout="@layout/fragment_weather" >
+        <action
+            android:id="@+id/action_nav_weatherFragment_to_nav_placeFragment"
+            app:destination="@id/nav_placeFragment" />
+    </fragment>
 
 
 </navigation>

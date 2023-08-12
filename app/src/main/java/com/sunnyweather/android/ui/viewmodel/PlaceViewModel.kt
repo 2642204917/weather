@@ -1,11 +1,8 @@
 package com.sunnyweather.android.ui.viewmodel
-
-import android.app.Application
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-
 import androidx.lifecycle.viewModelScope
 import com.sunnyweather.android.R
 import com.sunnyweather.android.logic.model.Place
@@ -40,13 +37,17 @@ class PlaceViewModel : BaseViewModel() {
 
     }
 
-
     fun savePlace(place: Place) {
         viewModelScope.launch {
-            HttpRepository.savePlace(place).onSuccess {
+            Log.d("TAG", "savePlace:+$place ")
+            HttpRepository.savePlace(place).onSuccess { isFirstSave ->
+
 
                 showToast(R.string.save_place_success)
-                //需要跳转到天气fragment
+
+                if (!isFirstSave) {
+                    return@launch
+                }
                 navigate(R.id.action_placeFragment_to_weatherFragment)
             }.onFailure {
                 showToast(R.string.sava_place_fail)

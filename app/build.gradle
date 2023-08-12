@@ -4,6 +4,20 @@ plugins {
     id 'kotlin-kapt'
 }
 android {
+    signingConfigs {
+        debug {
+            storeFile file('E:\\AndroidFiles\\sunnyweather\\app\\sunnyWeather.jks')
+            storePassword 'sunnyweather'
+            keyAlias 'sunnyweather'
+            keyPassword 'sunnyweather'
+        }
+        release {
+            storeFile file('E:\\AndroidFiles\\sunnyweather\\app\\sunnyWeather.jks')
+            storePassword 'sunnyweather'
+            keyAlias 'sunnyweather'
+            keyPassword 'sunnyweather'
+        }
+    }
     namespace 'com.sunnyweather.android'
     compileSdk 33
 
@@ -11,7 +25,7 @@ android {
 
         applicationId "com.sunnyweather.android"
         minSdk 24
-        targetSdk 33
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -19,6 +33,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -26,7 +41,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-    flavorDimensions 'app'
+    flavorDimensions =["app"]
     productFlavors {
         mock {
 
@@ -34,12 +49,14 @@ android {
             dimension "app"
             applicationIdSuffix '.mock'
             buildConfigField "String", "API_URL", "\"\""
+            buildConfigField "String", "TOKEN", "\"\""
 
         }
         dev {
             ext.apkName = "开发版"
             dimension "app"
             buildConfigField "String", "API_URL", "\"https://api.caiyunapp.com/\""
+            buildConfigField "String", "TOKEN", "\"2123131353\""
             applicationIdSuffix '.dev'
         }
 
@@ -47,6 +64,7 @@ android {
             ext.apkName = "正式版"
             dimension "app"
             buildConfigField "String", "API_URL", "\"https://api.caiyunapp.com/\""
+            buildConfigField "String", "TOKEN", "\"2123131353\""
             applicationIdSuffix '.product'
 
         }
@@ -66,7 +84,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             applicationVariants.all { variant ->
                 variant.outputs.all {
-                    outputFileName = "${variant.productFlavors[0].ext.apkName}-${defaultConfig.versionName}-${defaultConfig.versionCode}-${new Date().format("yyyyMMddHHmmss")}-${variant.buildType.name}.apk"
+                    //${variant.productFlavors[0].ext.apkName}
+                    outputFileName = "${defaultConfig.versionName}-${defaultConfig.versionCode}-${new Date().format("yyyyMMddHHmmss")}-${variant.buildType.name}.apk"
                 }
             }
 

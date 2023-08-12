@@ -5,13 +5,25 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/place_fragment"
+            android:name="com.sunnyweather.android.ui.fragment.PlaceFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="天气页面" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_gravity="start" />
+    </androidx.drawerlayout.widget.DrawerLayout>
+
 </layout>

@@ -3,15 +3,12 @@ package com.sunnyweather.android.logic
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.IdRes
-import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
-import androidx.navigation.NavArgs
 import androidx.navigation.NavOptions
 import com.sunnyweather.android.ui.base.BaseFragment
 import java.lang.ref.WeakReference
 
 sealed class ContextEvent {
-    val time = System.currentTimeMillis()
 }
 
 
@@ -41,7 +38,6 @@ class ContextEventObserver(listener: ContextEventListener) : Observer<ContextEve
 
     override fun onChanged(value: ContextEvent) {
         val listener = contextEventListener.get() ?: return
-
         when (value) {
             is ShowToast -> listener.showToast(value)
             is ShowFragment -> listener.showFragment(value)

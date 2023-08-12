@@ -13,9 +13,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 object HttpRepository : ApiRepository {
 
     private const val url = BuildConfig.API_URL
+
     @Suppress("KotlinConstantConditions")
     private const val mock: Boolean = BuildConfig.FLAVOR == "mock"
     private val placeMutableData: MutableLiveData<Place> = MutableLiveData()
+
     @Suppress("unused")
     val placeLiveData: LiveData<Place> = placeMutableData
 
@@ -26,7 +28,7 @@ object HttpRepository : ApiRepository {
     }
 
 
-    private val httpService:NetApi = if (mock) {
+    private val httpService: NetApi = if (mock) {
         Class.forName("com.sunnyweather.android.network.NetMock").getConstructor()
             .newInstance() as NetApi
     } else {
@@ -46,9 +48,11 @@ object HttpRepository : ApiRepository {
     }
 
 
-    suspend fun savePlace(place: Place) = runCatching {
+    suspend fun savePlace(place: Place): Result<Boolean> = runCatching {
+        val isFirstSave= placeLiveData.value==null
         placeMutableData.value = place
         PlaceDataStore.savePlace(place)
+         isFirstSave
     }
 }
 

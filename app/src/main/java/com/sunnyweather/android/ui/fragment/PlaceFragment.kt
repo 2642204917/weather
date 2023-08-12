@@ -2,12 +2,9 @@ package com.sunnyweather.android.ui.fragment
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import com.sunnyweather.android.databinding.FragmentPlaceBinding
 import com.sunnyweather.android.logic.PlaceAdapter
@@ -32,7 +29,6 @@ class PlaceFragment : BaseFragment() {
             it.lifecycleOwner = viewLifecycleOwner
             it.placeVM = placeViewModel
             it.setUpItem()
-           // setBackPress()
         }.root
         return binding
     }
@@ -40,19 +36,12 @@ class PlaceFragment : BaseFragment() {
 
     private fun FragmentPlaceBinding.setUpItem() {
         val placeAdapter = PlaceAdapter(emptyList())
-
         placeViewModel.placelist.observe(viewLifecycleOwner) { result ->
-
             placeAdapter.placeList = result
             placeAdapter.notifyItemChanged(0)
         }
         placeAdapter.onClick = placeViewModel::savePlace
         placeRv.adapter = placeAdapter
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("TAG", "onDestroy:place销毁 ")
     }
 
 }
