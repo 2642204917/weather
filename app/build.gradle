@@ -3,21 +3,19 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
 }
-
 android {
     namespace 'com.sunnyweather.android'
     compileSdk 33
 
     defaultConfig {
+
         applicationId "com.sunnyweather.android"
         minSdk 24
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -28,31 +26,72 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+    flavorDimensions 'app'
+    productFlavors {
+        mock {
+
+            ext.apkName = "测试版"
+            dimension "app"
+            applicationIdSuffix '.mock'
+            buildConfigField "String", "API_URL", "\"\""
+
+        }
+        dev {
+            ext.apkName = "开发版"
+            dimension "app"
+            buildConfigField "String", "API_URL", "\"https://api.caiyunapp.com/\""
+            applicationIdSuffix '.dev'
+        }
+
+        product {
+            ext.apkName = "正式版"
+            dimension "app"
+            buildConfigField "String", "API_URL", "\"https://api.caiyunapp.com/\""
+            applicationIdSuffix '.product'
+
+        }
+
+
+    }
     kotlinOptions {
         jvmTarget = '17'
     }
     dataBinding {
         enabled = true
     }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "${variant.productFlavors[0].ext.apkName}-${defaultConfig.versionName}-${defaultConfig.versionCode}-${new Date().format("yyyyMMddHHmmss")}-${variant.buildType.name}.apk"
+                }
+            }
+
+        }
+    }
+
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.fragment:fragment-ktx:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'androidx.datastore:datastore-preferences:1.0.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
 
 }

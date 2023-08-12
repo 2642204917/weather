@@ -11,14 +11,34 @@
         tools:layout="@layout/fragment_start">
         <action
             android:id="@+id/action_nav_startFragment_to_placeFragment"
-            app:destination="@id/placeFragment" />
+            app:destination="@id/nav_placeFragment"
+            app:popUpTo="@id/nav_startFragment"
+            app:popUpToInclusive="true" />
+
+
+        <action
+            android:id="@+id/action_nav_startFragment_to_weatherFragment"
+            app:destination="@id/nav_weatherFragment"
+            app:popUpTo="@id/nav_startFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/placeFragment"
+        android:id="@+id/nav_placeFragment"
         android:name="com.sunnyweather.android.ui.fragment.PlaceFragment"
         android:label="PlaceFragment"
+        tools:layout="@layout/fragment_place">
+        <action
+            android:id="@+id/action_placeFragment_to_weatherFragment"
+            app:destination="@id/nav_weatherFragment"
+            app:popUpTo="@id/nav_placeFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_weatherFragment"
+        android:name="com.sunnyweather.android.ui.fragment.WeatherFragment"
+        android:label="WeatherFragment"
 
-        />
+        tools:layout="@layout/fragment_weather" />
 
 
 </navigation>

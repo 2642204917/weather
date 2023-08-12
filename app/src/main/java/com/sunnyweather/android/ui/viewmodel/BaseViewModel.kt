@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.annotation.MainThread
 import androidx.annotation.StringRes
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavOptions
@@ -48,7 +47,7 @@ open class BaseViewModel : ViewModel() {
     }
 
     @MainThread
-    protected fun navigate(@IdRes id: Int, args: Bundle?, options: NavOptions?) {
+    protected fun navigate(@IdRes id: Int, args: Bundle?=null, options: NavOptions?=null) {
 
         sendContextEvent(Navigate(id, args, options))
     }

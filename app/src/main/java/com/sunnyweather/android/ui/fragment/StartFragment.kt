@@ -1,6 +1,7 @@
 package com.sunnyweather.android.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,5 +29,10 @@ class StartFragment : BaseFragment() {
             observeContext(startViewModel._contextEvent)
         }.root
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("TAG", "onDestroy:start销毁 ")
     }
 }

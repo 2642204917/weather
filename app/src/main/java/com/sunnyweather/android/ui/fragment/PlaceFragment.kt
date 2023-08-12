@@ -2,6 +2,7 @@ package com.sunnyweather.android.ui.fragment
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,11 @@ import com.sunnyweather.android.ui.viewmodel.PlaceViewModel
 class PlaceFragment : BaseFragment() {
 
     private val placeViewModel by viewModels<PlaceViewModel>()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        observeContext(placeViewModel._contextEvent)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,10 +29,10 @@ class PlaceFragment : BaseFragment() {
     ): View {
 
         val binding = FragmentPlaceBinding.inflate(inflater, container, false).also {
-            it.lifecycleOwner = requireActivity()
+            it.lifecycleOwner = viewLifecycleOwner
             it.placeVM = placeViewModel
             it.setUpItem()
-            setBackPress()
+           // setBackPress()
         }.root
         return binding
     }
@@ -35,31 +41,18 @@ class PlaceFragment : BaseFragment() {
     private fun FragmentPlaceBinding.setUpItem() {
         val placeAdapter = PlaceAdapter(emptyList())
 
-        placeViewModel.placeLiveData.observe(requireActivity()) { result ->
+        placeViewModel.placelist.observe(viewLifecycleOwner) { result ->
 
-            result.onSuccess {
-                placeAdapter.placeList = it
-                placeAdapter.notifyItemChanged(0)
-
-            }
+            placeAdapter.placeList = result
+            placeAdapter.notifyItemChanged(0)
         }
         placeAdapter.onClick = placeViewModel::savePlace
         placeRv.adapter = placeAdapter
-
     }
 
-    private fun setBackPress() {
-        val callBack = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-
-                Toast.makeText(requireContext(), "请输入地址", Toast.LENGTH_SHORT).show()
-                return
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(callBack)
-
-
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("TAG", "onDestroy:place销毁 ")
     }
-
 
 }

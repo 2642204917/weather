@@ -1,18 +1,21 @@
 package com.sunnyweather.android.ui.viewmodel
 
+import android.app.Application
+import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.viewModelScope
 import com.sunnyweather.android.R
 import com.sunnyweather.android.logic.model.Place
 import com.sunnyweather.android.logic.reporstry.HttpRepository
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+
 
 class PlaceViewModel : BaseViewModel() {
-    private val _placeLiveData = MutableLiveData<Result<List<Place>>>()
-    val placeLiveData: LiveData<Result<List<Place>>> = _placeLiveData
+    private val _placeList = MutableLiveData<List<Place>>()
+    val placelist: LiveData<List<Place>> = _placeList
     val query = ObservableField<String>()
 
 
@@ -28,17 +31,29 @@ class PlaceViewModel : BaseViewModel() {
             return
         }
 
-        _placeLiveData.value = HttpRepository.startQuery(queryStr)
+        HttpRepository.startQuery(queryStr).onSuccess {
+            _placeList.value = it
+        }.onFailure {
+            showToast(R.string.query_fail)
+        }
 
 
     }
 
 
     fun savePlace(place: Place) {
-        runBlocking {
-            HttpRepository.savePlace(place)
-        }
+        viewModelScope.launch {
+            HttpRepository.savePlace(place).onSuccess {
 
+                showToast(R.string.save_place_success)
+                //需要跳转到天气fragment
+                navigate(R.id.action_placeFragment_to_weatherFragment)
+            }.onFailure {
+                showToast(R.string.sava_place_fail)
+            }
+
+
+        }
     }
 
 }

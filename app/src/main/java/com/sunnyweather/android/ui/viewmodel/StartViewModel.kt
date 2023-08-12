@@ -15,13 +15,10 @@ class StartViewModel : BaseViewModel() {
         viewModelScope.launch {
 
             val savePlace = httpRepository.getSavePlace()
-            Log.d(TAG, "getSavePlace: ++++" + savePlace)
-
             if (savePlace == null) {
-                Log.d(TAG, "getSavePlace: 为空")
-                navigate(R.id.action_nav_startFragment_to_placeFragment, null, null)
-            } else {
-                Log.d(TAG, "getSavePlace: 不为空")
+                navigate(R.id.action_nav_startFragment_to_placeFragment)
+            }else{
+                navigate(R.id.action_nav_startFragment_to_weatherFragment)
             }
         }
     }

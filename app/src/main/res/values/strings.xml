@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">sunnyweather</string>
     <string name="search_hint">请输入城市</string>
+    <string name="sava_place_fail">保存失败，请重试</string>
+    <string name="save_place_success">地址保存成功</string>
+    <string name="query_fail">查询失败</string>
 </resources>
