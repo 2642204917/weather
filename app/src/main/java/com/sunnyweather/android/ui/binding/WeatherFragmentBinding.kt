@@ -40,15 +40,17 @@ fun TextView.currentAqi(aqi: Int) {
 }
 
 @BindingAdapter("currentDate")
-fun TextView.currentDate(date: Date?) {
-    date?:return
-    val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-    text = simpleDateFormat.format(date)
+fun TextView.currentDate(date: String?) {
+    date ?: return
+    val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm")
+    val date = formatter.parse("2023-08-13T00:00+08:00")
+    val sdf = SimpleDateFormat("yyyy-MM-dd")
+    text = sdf.format(date)
 }
 
 @BindingAdapter("currentSkyIcon")
 fun TextView.currentSkyIcon(date: Date?) {
-    date?:return
+    date ?: return
     val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     text = simpleDateFormat.format(date)
 }

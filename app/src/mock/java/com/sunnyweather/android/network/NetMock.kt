@@ -101,7 +101,7 @@ class NetMock : NetApi {
             ),
             skycon = listOf(
                 Skycon(
-                    date = Date("2023-08-13T00:00+08:00"), value = "PARTLY_CLOUDY_NIGHT"
+                    date = "2023-08-13T00:00+08:00", value = "PARTLY_CLOUDY_NIGHT"
                 )
             ),
             lifeIndex = listOf(

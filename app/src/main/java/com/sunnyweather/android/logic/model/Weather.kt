@@ -32,7 +32,7 @@ data class WindForDailyWeather(
 data class Max(val speed: Double, val direction: Double)
 data class Min(val speed: Double, val direction: Double)
 data class Avg(val speed: Double, val direction: Double)
-data class Skycon(val date: Date, val value: String)
+data class Skycon(val date: String, val value: String)
 data class LifeIndex(
     val ultraviolet: LifeDescription,
     val comfort: LifeDescription,

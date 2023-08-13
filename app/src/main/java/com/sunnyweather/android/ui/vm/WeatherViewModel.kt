@@ -14,9 +14,12 @@ import kotlinx.coroutines.launch
 
 class WeatherViewModel : BaseViewModel() {
     private val httpRepository = HttpRepository
-    val placeLiveData: LiveData<Place> = httpRepository.placeLiveData
+    val placeLiveData: LiveData<Place> = httpRepository.placeLiveData.map {
+        refreshWeather()
+        it.copy()
+    }
     private val weatherMutableLiveData = MutableLiveData<Weather>()
-     val weatherLiveData:LiveData<Weather> = weatherMutableLiveData
+    val weatherLiveData: LiveData<Weather> = weatherMutableLiveData
     val isRefreshing = MutableLiveData<Boolean>()
 
 
@@ -42,7 +45,7 @@ class WeatherViewModel : BaseViewModel() {
                 showToast(R.string.toast_load_weather_success)
                 isRefreshing.value = false
             } else {
-                isRefreshing.value=false
+                isRefreshing.value = false
                 showToast(R.string.toast_load_weather_failed)
             }
         }
