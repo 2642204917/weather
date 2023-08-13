@@ -4,7 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.sunnyweather.android.BuildConfig
 import com.sunnyweather.android.logic.PlaceDataStore
+import com.sunnyweather.android.logic.model.DailyWeatherResponseBean
 import com.sunnyweather.android.logic.model.Place
+import com.sunnyweather.android.logic.model.Realtime
+import com.sunnyweather.android.logic.model.RealtimeResponseBean
 import com.sunnyweather.android.logic.network.NetApi
 import com.sunnyweather.android.logic.util.gsonFormat
 import retrofit2.Retrofit
@@ -18,7 +21,6 @@ object HttpRepository : ApiRepository {
     private const val mock: Boolean = BuildConfig.FLAVOR == "mock"
     private val placeMutableData: MutableLiveData<Place> = MutableLiveData()
 
-    @Suppress("unused")
     val placeLiveData: LiveData<Place> = placeMutableData
 
 
@@ -47,12 +49,25 @@ object HttpRepository : ApiRepository {
         httpService.searchPlaces(query).places
     }
 
-
     suspend fun savePlace(place: Place): Result<Boolean> = runCatching {
-        val isFirstSave= placeLiveData.value==null
+        val isFirstSave = placeLiveData.value == null
         placeMutableData.value = place
         PlaceDataStore.savePlace(place)
-         isFirstSave
+        isFirstSave
+    }
+
+    suspend fun realTime(): Result<RealtimeResponseBean> = runCatching {
+        httpService.realTime(
+            placeLiveData.value!!.location.lng.toString(),
+            placeLiveData.value!!.location.lat.toString()
+        ).result.data
+    }
+
+    suspend fun dailyWeather(): Result<DailyWeatherResponseBean> = runCatching {
+        httpService.dailyWeather(
+            placeLiveData.value!!.location.lng.toString(),
+            placeLiveData.value!!.location.lat.toString()
+        ).result.data
     }
 }
 

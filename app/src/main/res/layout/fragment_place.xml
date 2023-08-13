@@ -6,7 +6,7 @@
 
         <variable
             name="placeVM"
-            type="com.sunnyweather.android.ui.viewmodel.PlaceViewModel" />
+            type="com.sunnyweather.android.ui.vm.PlaceViewModel" />
     </data>
 
     <LinearLayout

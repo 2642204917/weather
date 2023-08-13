@@ -1,7 +1,5 @@
-package com.sunnyweather.android.ui.viewmodel
+package com.sunnyweather.android.ui.vm
 
-
-import android.util.Log
 
 import androidx.lifecycle.viewModelScope
 import com.sunnyweather.android.R

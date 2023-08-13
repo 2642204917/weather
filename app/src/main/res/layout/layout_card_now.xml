@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="weatherVm"
+            type="com.sunnyweather.android.ui.vm.WeatherViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="530dp"
+        android:orientation="vertical"
+        app:currentTempBg="@{weatherVm.weatherLiveData.realtime.skycon}">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:fitsSystemWindows="true">
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15dp"
+                android:background="@null"
+                android:src="@drawable/baseline_home_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:ellipsize="middle"
+                android:singleLine="true"
+                android:text="@{weatherVm.placeLiveData.name}"
+                android:textSize="22sp" />
+
+        </FrameLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="70sp"
+                app:currentTemp="@{weatherVm.weatherLiveData.realtime.temperature}"
+                tools:text="35 ℃" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/currentSky"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="18sp"
+                    app:currentSky="@{weatherVm.weatherLiveData.realtime.skycon}"
+                    tools:text="晴天" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:text="|"
+
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/currentAQI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:textSize="18sp"
+                    app:currentAqi="@{weatherVm.weatherLiveData.realtime.airQuality.aqi.chn}"
+                    tools:text="空气指数 25" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

@@ -1,7 +1,7 @@
 package com.sunnyweather.android.logic.model
 
-data class PlaceResponseBean(val status: String, val query: String, val places: List<Place>) :
-    BaseResponseBean()
+data class PlaceResponseBean(val status: String, val query: String, val places: List<Place>)
+
 
 data class Place(
     val id: String,

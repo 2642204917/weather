@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.sunnyweather.android.databinding.FragmentStartBinding
 import com.sunnyweather.android.ui.base.BaseFragment
-import com.sunnyweather.android.ui.viewmodel.StartViewModel
+import com.sunnyweather.android.ui.vm.StartViewModel
 
 class StartFragment : BaseFragment() {
 

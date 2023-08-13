@@ -4,4 +4,9 @@
     <string name="sava_place_fail">保存失败，请重试</string>
     <string name="save_place_success">地址保存成功</string>
     <string name="query_fail">查询失败</string>
+    <string name="toast_load_weather_failed">天气加载失败</string>
+    <string name="toast_load_weather_success">查询天气成功</string>
+    <string name="life_index_common_cold">感冒</string>
+    <string name="current_weather_temp">%d ℃</string>
+    <string name="current_weather_aqi">空气指数 %d</string>
 </resources>

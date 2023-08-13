@@ -1,4 +1,4 @@
-package com.sunnyweather.android.ui.viewmodel
+package com.sunnyweather.android.ui.vm
 
 import com.sunnyweather.android.logic.reporstry.HttpRepository
 

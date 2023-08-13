@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import com.sunnyweather.android.databinding.FragmentPlaceBinding
 import com.sunnyweather.android.logic.PlaceAdapter
 import com.sunnyweather.android.ui.base.BaseFragment
-import com.sunnyweather.android.ui.viewmodel.PlaceViewModel
+import com.sunnyweather.android.ui.vm.PlaceViewModel
 
 class PlaceFragment : BaseFragment() {
 

@@ -1,4 +1,4 @@
-package com.sunnyweather.android.ui.viewmodel
+package com.sunnyweather.android.ui.vm
 
 import android.os.Bundle
 import androidx.annotation.IdRes

@@ -1,4 +1,4 @@
-package com.sunnyweather.android.ui.viewmodel
+package com.sunnyweather.android.ui.vm
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
