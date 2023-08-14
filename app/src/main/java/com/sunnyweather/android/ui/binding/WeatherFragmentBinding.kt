@@ -1,16 +1,15 @@
 package com.sunnyweather.android.ui.binding
 
-import android.view.inputmethod.EditorInfo
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.annotation.DrawableRes
+
 import androidx.databinding.BindingAdapter
-import com.google.android.material.textfield.TextInputEditText
 import com.sunnyweather.android.R
-import com.sunnyweather.android.logic.model.Skycon
+
+import com.sunnyweather.android.logic.model.Temperature
 import com.sunnyweather.android.logic.model.getSky
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
 @BindingAdapter("currentTempBg")
@@ -42,15 +41,23 @@ fun TextView.currentAqi(aqi: Int) {
 @BindingAdapter("currentDate")
 fun TextView.currentDate(date: String?) {
     date ?: return
-    val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm")
-    val date = formatter.parse("2023-08-13T00:00+08:00")
-    val sdf = SimpleDateFormat("yyyy-MM-dd")
-    text = sdf.format(date)
+    val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm",Locale.getDefault(Locale.Category.FORMAT))
+    val time = formatter.parse(date)
+    val sdf = SimpleDateFormat("yyyy-MM-dd",Locale.getDefault(Locale.Category.FORMAT))
+    text = time?.let { sdf.format(it) }
 }
 
-@BindingAdapter("currentSkyIcon")
-fun TextView.currentSkyIcon(date: Date?) {
-    date ?: return
-    val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-    text = simpleDateFormat.format(date)
+@BindingAdapter("skyIcon")
+fun ImageView.skyIcon(skyCon: String) {
+    setBackgroundResource(getSky(skyCon).icon)
+}
+
+@BindingAdapter("skyInfo")
+fun TextView.skyInfo(skyCon: String) {
+    text = getSky(skyCon).info
+}
+
+@BindingAdapter("temperatureInterval")
+fun TextView.temperatureInterval(temperature: Temperature) {
+    text =context.getString(R.string.current_temperature_interval, temperature.min.toInt(),temperature.max.toInt())
 }

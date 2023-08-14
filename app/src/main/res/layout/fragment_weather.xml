@@ -33,9 +33,9 @@
                         layout="@layout/layout_card_now"
                         app:weatherVm="@{weatherVm}" />
 
-                    <include layout="@layout/layout_card_forecast"
-
-                        />
+                    <include
+                        android:id="@+id/layout_card_forecast"
+                        layout="@layout/layout_card_forecast" />
 
                     <include layout="@layout/layout_card_life_index" />
 

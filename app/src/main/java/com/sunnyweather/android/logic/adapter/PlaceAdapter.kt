@@ -1,10 +1,7 @@
-package com.sunnyweather.android.logic
+package com.sunnyweather.android.logic.adapter
 
-import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sunnyweather.android.databinding.ItemPlaceBinding
 import com.sunnyweather.android.logic.model.Place

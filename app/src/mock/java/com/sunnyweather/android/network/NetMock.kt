@@ -29,9 +29,8 @@ import com.sunnyweather.android.logic.model.WindForDailyWeather
 import com.sunnyweather.android.logic.model.WindForRealtime
 import com.sunnyweather.android.logic.network.NetApi
 import kotlinx.coroutines.delay
-import java.util.Date
 
-
+@Suppress("unused")
 class NetMock : NetApi {
     override suspend fun searchPlaces(query: String): PlaceResponseBean {
         val places = ArrayList<Place>()
@@ -40,7 +39,7 @@ class NetMock : NetApi {
             val place = Place("$it", "${query}$it", "广东省广州市天河区", Location(1.0, 1.0))
             places.add(place)
         }
-        return PlaceResponseBean("ok", "$query", places)
+        return PlaceResponseBean("ok", query, places)
     }
 
     override suspend fun realTime(
@@ -90,6 +89,10 @@ class NetMock : NetApi {
             status = "ok",
             temperature = listOf(
                 Temperature(date = "2023-08-13T00:00+08:00", max = 33.34, min = 18.43, avg = 25.86),
+                Temperature(date = "2023-08-14T00:00+08:00", max = 33.34, min = 18.43, avg = 25.86),
+                Temperature(date = "2023-08-15T00:00+08:00", max = 33.34, min = 18.43, avg = 25.86),
+                Temperature(date = "2023-08-16T00:00+08:00", max = 33.34, min = 18.43, avg = 25.86),
+                Temperature(date = "2023-08-17T00:00+08:00", max = 33.34, min = 18.43, avg = 25.86),
             ),
             wind = listOf(
                 WindForDailyWeather(
@@ -100,9 +103,11 @@ class NetMock : NetApi {
                 )
             ),
             skycon = listOf(
-                Skycon(
-                    date = "2023-08-13T00:00+08:00", value = "PARTLY_CLOUDY_NIGHT"
-                )
+                Skycon(date = "2023-08-13T00:00+08:00", value = "PARTLY_CLOUDY_NIGHT"),
+                Skycon(date = "2023-08-14T00:00+08:00", value = "PARTLY_CLOUDY_NIGHT"),
+                Skycon(date = "2023-08-15T00:00+08:00", value = "PARTLY_CLOUDY_NIGHT"),
+                Skycon(date = "2023-08-16T00:00+08:00", value = "PARTLY_CLOUDY_NIGHT"),
+                Skycon(date = "2023-08-17T00:00+08:00", value = "PARTLY_CLOUDY_NIGHT"),
             ),
             lifeIndex = listOf(
                 LifeIndex(
