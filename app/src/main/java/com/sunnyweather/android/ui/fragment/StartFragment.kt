@@ -23,7 +23,7 @@ class StartFragment : BaseFragment() {
             false
         ).also {
             startViewModel.getSavePlace()
-            observeContext(startViewModel._contextEvent)
+            observeContext(startViewModel.contextEvent)
         }.root
 
     }

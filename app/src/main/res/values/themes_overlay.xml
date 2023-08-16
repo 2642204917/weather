@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.Theme.OverLay" parent="Theme.Material3.DayNight.NoActionBar">
+
+    </style>
+
+    <style name="icon_imageView" parent="">
+        <item name="tint">?attr/icon_color</item>
+    </style>
+</resources>

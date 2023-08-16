@@ -7,10 +7,10 @@
 
         <variable
             name="skyCon"
-            type="com.sunnyweather.android.logic.model.Skycon" />
+            type="com.sunnyweather.android.logic.model.DailyWeatherResponseBean.Skycon" />
         <variable
             name="temperature"
-            type="com.sunnyweather.android.logic.model.Temperature" />
+            type="com.sunnyweather.android.logic.model.DailyWeatherResponseBean.Temperature" />
     </data>
 
     <LinearLayout

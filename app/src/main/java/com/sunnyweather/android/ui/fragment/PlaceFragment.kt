@@ -16,7 +16,7 @@ class PlaceFragment : BaseFragment() {
     private val placeViewModel by viewModels<PlaceViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        observeContext(placeViewModel._contextEvent)
+        observeContext(placeViewModel.contextEvent)
     }
 
     override fun onCreateView(

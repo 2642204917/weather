@@ -2,7 +2,7 @@ package com.sunnyweather.android
 
 import android.app.Application
 
-class mApplication : Application() {
+class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

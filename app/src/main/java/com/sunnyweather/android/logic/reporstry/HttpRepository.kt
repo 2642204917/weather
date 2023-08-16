@@ -6,10 +6,11 @@ import com.sunnyweather.android.BuildConfig
 import com.sunnyweather.android.logic.PlaceDataStore
 import com.sunnyweather.android.logic.model.DailyWeatherResponseBean
 import com.sunnyweather.android.logic.model.Place
-import com.sunnyweather.android.logic.model.Realtime
 import com.sunnyweather.android.logic.model.RealtimeResponseBean
 import com.sunnyweather.android.logic.network.NetApi
 import com.sunnyweather.android.logic.util.gsonFormat
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -25,7 +26,13 @@ object HttpRepository : ApiRepository {
 
 
     private val retrofit by lazy {
-        Retrofit.Builder().baseUrl(url).addConverterFactory(GsonConverterFactory.create(gsonFormat))
+        val client = OkHttpClient.Builder().apply {
+                val interceptor = HttpLoggingInterceptor()
+                interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+                addInterceptor(interceptor) }.build()
+        Retrofit.Builder().baseUrl(url)
+            .addConverterFactory(GsonConverterFactory.create(gsonFormat))
+            .client(client)
             .build()
     }
 
@@ -60,14 +67,14 @@ object HttpRepository : ApiRepository {
         httpService.realTime(
             placeLiveData.value!!.location.lng.toString(),
             placeLiveData.value!!.location.lat.toString()
-        ).result.data
+        ).result
     }
 
     suspend fun dailyWeather(): Result<DailyWeatherResponseBean> = runCatching {
         httpService.dailyWeather(
             placeLiveData.value!!.location.lng.toString(),
             placeLiveData.value!!.location.lat.toString()
-        ).result.data
+        ).result
     }
 }
 

@@ -1,5 +1,6 @@
 package com.sunnyweather.android.ui.vm
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
@@ -29,15 +30,11 @@ class WeatherViewModel : BaseViewModel() {
             val realTimeDeferred = async {
                 HttpRepository.realTime()
             }
-
-
             val dailyWeatherDeferred = async { HttpRepository.dailyWeather() }
+
             val realTimeResponse = realTimeDeferred.await()
             val dailyWeatherResponse = dailyWeatherDeferred.await()
-
-
             if (realTimeResponse.isSuccess && dailyWeatherResponse.isSuccess) {
-
                 weatherMutableLiveData.value = Weather(
                     realTimeResponse.getOrNull()!!.realtime,
                     dailyWeatherResponse.getOrNull()!!.daily

@@ -1,4 +1,4 @@
-package com.sunnyweather.android.logic
+package com.sunnyweather.android.logic.event
 
 import android.os.Bundle
 import android.widget.Toast

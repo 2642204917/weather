@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
 import com.sunnyweather.android.databinding.FragmentWeatherBinding
 import com.sunnyweather.android.logic.adapter.ForecastAdapter
 import com.sunnyweather.android.ui.base.BaseFragment
@@ -21,13 +22,16 @@ class WeatherFragment : BaseFragment() {
         return FragmentWeatherBinding.inflate(inflater, container, false).also {
             it.lifecycleOwner = viewLifecycleOwner
             it.weatherVm = weatherViewModel
-            weatherViewModel.refreshWeather()
             it.setUp()
-            observeContext(weatherViewModel._contextEvent)
+
 
         }.root
     }
 
+    override fun onLifecycleOwnerCreated(owner: LifecycleOwner) {
+        super.onLifecycleOwnerCreated(owner)
+        observeContext(weatherViewModel.contextEvent)
+    }
     private fun FragmentWeatherBinding.setUp() {
         val adapter = ForecastAdapter(emptyList(), emptyList())
         layoutCardForecast.forecastRv.adapter = adapter

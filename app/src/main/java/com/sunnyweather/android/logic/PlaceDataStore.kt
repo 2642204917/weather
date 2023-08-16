@@ -8,9 +8,10 @@ import androidx.datastore.preferences.core.doublePreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.sunnyweather.android.MyApplication.Companion.application
 import com.sunnyweather.android.logic.model.Location
 import com.sunnyweather.android.logic.model.Place
-import com.sunnyweather.android.mApplication.Companion.application
+
 import kotlinx.coroutines.flow.first
 
 object PlaceDataStore {
