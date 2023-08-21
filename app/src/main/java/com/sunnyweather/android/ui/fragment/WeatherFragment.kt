@@ -1,11 +1,13 @@
 package com.sunnyweather.android.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import com.sunnyweather.android.databinding.FragmentWeatherBinding
@@ -37,7 +39,25 @@ class WeatherFragment : BaseFragment() {
 
     private fun FragmentWeatherBinding.setUp() {
 
+        sidebar.addDrawerListener(object : DrawerLayout.DrawerListener {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+            }
 
+            override fun onDrawerOpened(drawerView: View) {
+
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+                val systemService =
+                    requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                systemService.hideSoftInputFromWindow(sidebar.windowToken, 0)
+            }
+
+            override fun onDrawerStateChanged(newState: Int) {
+
+            }
+
+        })
 
         layoutCardNow.searchAddress.setOnClickListener {
             sidebar.openDrawer(GravityCompat.START)
