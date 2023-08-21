@@ -1,32 +1,10 @@
 package com.sunnyweather.android.network
-
-import com.sunnyweather.android.logic.model.AirQuality
-import com.sunnyweather.android.logic.model.Aqi
-import com.sunnyweather.android.logic.model.Avg
 import com.sunnyweather.android.logic.model.BaseResponseBean
-import com.sunnyweather.android.logic.model.Daily
 import com.sunnyweather.android.logic.model.DailyWeatherResponseBean
-
-import com.sunnyweather.android.logic.model.Description
-import com.sunnyweather.android.logic.model.LifeDescription
-import com.sunnyweather.android.logic.model.LifeIndex
-
-import com.sunnyweather.android.logic.model.Local
 import com.sunnyweather.android.logic.model.Location
-import com.sunnyweather.android.logic.model.Max
-import com.sunnyweather.android.logic.model.Min
-import com.sunnyweather.android.logic.model.Nearest
 import com.sunnyweather.android.logic.model.Place
 import com.sunnyweather.android.logic.model.PlaceResponseBean
-
-import com.sunnyweather.android.logic.model.PrecipitationForRealTime
-import com.sunnyweather.android.logic.model.Realtime
 import com.sunnyweather.android.logic.model.RealtimeResponseBean
-import com.sunnyweather.android.logic.model.Result
-import com.sunnyweather.android.logic.model.Skycon
-import com.sunnyweather.android.logic.model.Temperature
-import com.sunnyweather.android.logic.model.WindForDailyWeather
-import com.sunnyweather.android.logic.model.WindForRealtime
 import com.sunnyweather.android.logic.network.NetApi
 import kotlinx.coroutines.delay
 
@@ -48,35 +26,29 @@ class NetMock : NetApi {
     ): BaseResponseBean<RealtimeResponseBean> {
         delay(2000)
         val realtimeResponseBean =
+
             RealtimeResponseBean(
-                realtime = Realtime(
+                realtime = RealtimeResponseBean.Realtime(
                     status = "ok",
                     temperature = 35,
                     humidity = 0.09,
                     cloudrate = 0.41,
                     skycon = "PARTLY_CLOUDY_DAY",
-                    visibility = 30,
+
                     dswrf = 594.2,
-                    wind = WindForRealtime(speed = 2.52, direction = 129),
+                    wind = RealtimeResponseBean.WindForRealtime(speed = 2.52, direction = 129),
                     pressure = 83613.75,
                     apparentTemperature = 34.3,
-                    precipitation = PrecipitationForRealTime(
-                        local = Local("ok", "rader", 0.0),
-                        nearest = Nearest("ok", 60.87, 0.1875)
+                    precipitation = RealtimeResponseBean.PrecipitationForRealTime(
+                        local = RealtimeResponseBean.Local("ok", "rader", 0.0),
+                        nearest = RealtimeResponseBean.Nearest("ok", 60.87, 0.1875)
                     ),
-                    airQuality = AirQuality(
-                        pm25 = 4,
-                        pm10 = 0,
-                        o3 = 0,
-                        so2 = 0,
-                        no2 = 0,
-                        co = 0,
-                        aqi = Aqi(chn = 44, usa = 0),
-                        description = Description(chn = "", usa = "优")
+                    airQuality = RealtimeResponseBean.AirQuality(
+                        aqi = RealtimeResponseBean.Aqi(chn = 44, usa = 0),
                     ),
-                ), primary = 0
+                )
             )
-        return BaseResponseBean(status = "ok", result = Result(realtimeResponseBean))
+        return BaseResponseBean(status = "ok", result = realtimeResponseBean)
 
     }
 
@@ -85,61 +57,88 @@ class NetMock : NetApi {
         lag: String
     ): BaseResponseBean<DailyWeatherResponseBean> {
         delay(2000)
-        val daily = Daily(
-            status = "ok",
-            temperature = listOf(
-                Temperature(date = "2023-08-13T00:00+08:00", max = 33.34, min = 18.43, avg = 25.86),
-                Temperature(date = "2023-08-14T00:00+08:00", max = 33.34, min = 18.43, avg = 25.86),
-                Temperature(date = "2023-08-15T00:00+08:00", max = 33.34, min = 18.43, avg = 25.86),
-                Temperature(date = "2023-08-16T00:00+08:00", max = 33.34, min = 18.43, avg = 25.86),
-                Temperature(date = "2023-08-17T00:00+08:00", max = 33.34, min = 18.43, avg = 25.86),
-            ),
-            wind = listOf(
-                WindForDailyWeather(
-                    date = "2023-08-13T00:00+08:00",
-                    max = Max(30.8, 132.39),
-                    min = Min(2.88, 39.22),
-                    avg = Avg(19.92, 125.21)
-                )
-            ),
-            skycon = listOf(
-                Skycon(date = "2023-08-13T00:00+08:00", value = "PARTLY_CLOUDY_NIGHT"),
-                Skycon(date = "2023-08-14T00:00+08:00", value = "PARTLY_CLOUDY_NIGHT"),
-                Skycon(date = "2023-08-15T00:00+08:00", value = "PARTLY_CLOUDY_NIGHT"),
-                Skycon(date = "2023-08-16T00:00+08:00", value = "PARTLY_CLOUDY_NIGHT"),
-                Skycon(date = "2023-08-17T00:00+08:00", value = "PARTLY_CLOUDY_NIGHT"),
-            ),
-            lifeIndex = listOf(
-                LifeIndex(
-                    ultraviolet = LifeDescription(
-                        data = "2023-08-13T00:00+08:00",
-                        index = "3",
-                        desc = "中等"
+        val daily = DailyWeatherResponseBean(
+            DailyWeatherResponseBean.Daily(
+
+                temperature = listOf(
+                    DailyWeatherResponseBean.Temperature(
+                        max = 33.34F,
+                        min = 18.43F,
+
+                        ),
+                    DailyWeatherResponseBean.Temperature(
+                        max = 33.34F,
+                        min = 18.43F,
+
+                        ),
+                    DailyWeatherResponseBean.Temperature(
+                        max = 33.34F,
+                        min = 18.43F,
+
+                        ),
+                    DailyWeatherResponseBean.Temperature(
+                        max = 33.34F,
+                        min = 18.43F,
+
+                        ),
+                    DailyWeatherResponseBean.Temperature(
+                        max = 33.34F,
+                        min = 18.43F,
+
+                        )
+                ),
+
+                skycon = listOf(
+                    DailyWeatherResponseBean.Skycon(
+                        date = "2023-08-13T00:00+08:00",
+                        value = "PARTLY_CLOUDY_NIGHT"
                     ),
-                    comfort = LifeDescription(
-                        data = "2023-08-13T00:00+08:00",
-                        index = "3",
-                        desc = "较不适宜"
+                    DailyWeatherResponseBean.Skycon(
+                        date = "2023-08-14T00:00+08:00",
+                        value = "PARTLY_CLOUDY_NIGHT"
                     ),
-                    carWashing = LifeDescription(
-                        data = "2023-08-13T00:00+08:00",
-                        index = "3",
-                        desc = "热"
+                    DailyWeatherResponseBean.Skycon(
+                        date = "2023-08-15T00:00+08:00",
+                        value = "PARTLY_CLOUDY_NIGHT"
                     ),
-                    dressing = LifeDescription(
-                        data = "2023-08-13T00:00+08:00",
-                        index = "4",
-                        desc = "温暖"
+                    DailyWeatherResponseBean.Skycon(
+                        date = "2023-08-16T00:00+08:00",
+                        value = "PARTLY_CLOUDY_NIGHT"
                     ),
-                    coldRisk = LifeDescription(
-                        data = "2023-08-13T00:00+08:00",
-                        index = "4",
-                        desc = "极易发"
+                    DailyWeatherResponseBean.Skycon(
+                        date = "2023-08-17T00:00+08:00",
+                        value = "PARTLY_CLOUDY_NIGHT"
                     ),
-                )
-            ),
+                ),
+                lifeIndex =
+                DailyWeatherResponseBean.LifeIndex(
+                    ultraviolet = listOf(
+                        DailyWeatherResponseBean.LifeDescription(
+                            desc = "中等"
+                        )
+                    ),
+                    carWashing = listOf(
+                        DailyWeatherResponseBean.LifeDescription(
+
+                            desc = "热"
+                        )
+                    ),
+                    dressing = listOf(
+                        DailyWeatherResponseBean.LifeDescription(
+
+                            desc = "温暖"
+                        )
+                    ),
+                    coldRisk = listOf(
+                        DailyWeatherResponseBean.LifeDescription(
+                            desc = "极易发"
+
+                        )
+                    )
+                ),
+            )
         )
-        return BaseResponseBean(status = "ok", result = Result(DailyWeatherResponseBean(daily, 0)))
+        return BaseResponseBean(status = "ok", result = daily)
     }
 
 

@@ -1,9 +1,11 @@
 package com.sunnyweather.android.ui.fragment
 
 import android.os.Bundle
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
 import com.sunnyweather.android.databinding.FragmentWeatherBinding
@@ -32,7 +34,14 @@ class WeatherFragment : BaseFragment() {
         super.onLifecycleOwnerCreated(owner)
         observeContext(weatherViewModel.contextEvent)
     }
+
     private fun FragmentWeatherBinding.setUp() {
+
+
+
+        layoutCardNow.searchAddress.setOnClickListener {
+            sidebar.openDrawer(GravityCompat.START)
+        }
         val adapter = ForecastAdapter(emptyList(), emptyList())
         layoutCardForecast.forecastRv.adapter = adapter
         weatherViewModel.weatherLiveData.observe(viewLifecycleOwner) {
@@ -40,6 +49,8 @@ class WeatherFragment : BaseFragment() {
             adapter.temperatureList = it.daily.temperature
             adapter.notifyItemChanged(0)
         }
+
+
     }
 
 }

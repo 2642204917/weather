@@ -10,9 +10,11 @@
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/sidebar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:closeSideslip="@{weatherVm.isRefreshing()}">
+        app:closeSideslip="@{weatherVm.isRefreshing()}"
+        app:drawerLayoutListener="@{null}">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
@@ -30,6 +32,7 @@
                     android:orientation="vertical">
 
                     <include
+                        android:id="@+id/layout_card_now"
                         layout="@layout/layout_card_now"
                         app:weatherVm="@{weatherVm}" />
 
@@ -37,9 +40,9 @@
                         android:id="@+id/layout_card_forecast"
                         layout="@layout/layout_card_forecast" />
 
-                    <include layout="@layout/layout_card_life_index"
-                        app:weatherVm="@{weatherVm}"
-                        />
+                    <include
+                        layout="@layout/layout_card_life_index"
+                        app:weatherVm="@{weatherVm}" />
 
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>

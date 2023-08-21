@@ -9,6 +9,8 @@
     <string name="life_index_common_cold">感冒</string>
     <string name="current_weather_temp">%d ℃</string>
     <string name="current_weather_aqi">空气指数 %d</string>
-    <string name="current_temperature_interval">%d ~ %d ℃</string>
+    <string name="current_temperature_interval" formatted="false">%d ~ %d ℃</string>
     <string name="forecast">预报</string>
+    <string name="content_description_search">搜索</string>
+    <string name="split_line">|</string>
 </resources>

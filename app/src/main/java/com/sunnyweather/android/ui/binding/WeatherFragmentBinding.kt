@@ -1,15 +1,12 @@
 package com.sunnyweather.android.ui.binding
 
 import android.content.Context
-import android.hardware.input.InputManager
-import android.inputmethodservice.InputMethodService
-import android.view.Gravity
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.view.GravityCompat
-
 import androidx.databinding.BindingAdapter
 import androidx.drawerlayout.widget.DrawerLayout
 import com.sunnyweather.android.R
@@ -76,8 +73,30 @@ fun TextView.temperatureInterval(temperature: DailyWeatherResponseBean.Temperatu
 @BindingAdapter("closeSideslip")
 fun DrawerLayout.closeSideslip(startQuery: Boolean) {
     if (startQuery && this.isDrawerOpen(GravityCompat.START)) {
-        val systemService = this.context.getSystemService(Context.INPUT_METHOD_SERVICE)  as InputMethodManager
-        systemService.hideSoftInputFromWindow(this.windowToken,0)
+
         this.closeDrawer(GravityCompat.START)
     }
+}
+@BindingAdapter("drawerLayoutListener")
+fun DrawerLayout.drawerLayoutListener(@Suppress("unused") nothing: Nothing?) {
+    this.addDrawerListener(object : DrawerLayout.DrawerListener {
+        override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+        }
+
+        override fun onDrawerOpened(drawerView: View) {
+
+        }
+
+        override fun onDrawerClosed(drawerView: View) {
+            val systemService =
+                this@drawerLayoutListener.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            systemService.hideSoftInputFromWindow(this@drawerLayoutListener.windowToken, 0)
+        }
+
+        override fun onDrawerStateChanged(newState: Int) {
+
+        }
+
+    })
+
 }

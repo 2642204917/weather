@@ -8,6 +8,7 @@
         <variable
             name="skyCon"
             type="com.sunnyweather.android.logic.model.DailyWeatherResponseBean.Skycon" />
+
         <variable
             name="temperature"
             type="com.sunnyweather.android.logic.model.DailyWeatherResponseBean.Temperature" />
@@ -31,10 +32,11 @@
 
         <ImageView
             android:id="@+id/skyIcon"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@{skyCon.value}"
             app:skyIcon="@{skyCon.value}"
-            android:contentDescription="@{skyCon.value}"/>
+            tools:src="@mipmap/ic_cloudy" />
 
         <TextView
             android:id="@+id/skyInfo"

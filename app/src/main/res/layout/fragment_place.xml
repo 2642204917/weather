@@ -23,8 +23,7 @@
             android:inputType="text"
             android:paddingHorizontal="@dimen/search_padding_horizontal_10"
             android:text="@={placeVM.query}"
-            app:query="@{placeVM::query}"
-            />
+            app:query="@{placeVM::query}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/place_rv"

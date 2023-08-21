@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Base.Theme.OverLay" parent="Theme.Material3.DayNight.NoActionBar">
 
+    <style name="Base.Theme.OverLay" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="imageButtonStyle">@style/Widget.My.imageButtonStyle</item>
     </style>
 
     <style name="icon_imageView" parent="">
         <item name="tint">?attr/icon_color</item>
+    </style>
+
+    <style name="Widget.My.imageButtonStyle" parent="">
+        <item name="tint">?attr/img_view_tint</item>
     </style>
 </resources>
