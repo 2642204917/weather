@@ -1,6 +1,6 @@
 package com.sunnyweather.android.ui.vm
 
-import com.sunnyweather.android.logic.reporstry.HttpRepository
+import com.sunnyweather.android.logic.network.HttpRepository
 
 @Suppress("unused")
 class MainViewModel : BaseViewModel() {

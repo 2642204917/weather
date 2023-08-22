@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.sunnyweather.android.R
 import com.sunnyweather.android.logic.model.Place
-import com.sunnyweather.android.logic.reporstry.HttpRepository
+import com.sunnyweather.android.logic.network.HttpRepository
 import kotlinx.coroutines.launch
 
 

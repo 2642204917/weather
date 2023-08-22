@@ -1,4 +1,4 @@
-package com.sunnyweather.android.logic.reporstry
+package com.sunnyweather.android.logic.network
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,7 @@ import com.sunnyweather.android.logic.PlaceDataStore
 import com.sunnyweather.android.logic.model.DailyWeatherResponseBean
 import com.sunnyweather.android.logic.model.Place
 import com.sunnyweather.android.logic.model.RealtimeResponseBean
-import com.sunnyweather.android.logic.network.NetApi
+import com.sunnyweather.android.logic.network.adapter.ServiceResponseCallAdapterFactory
 import com.sunnyweather.android.logic.util.gsonFormat
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -27,12 +27,14 @@ object HttpRepository : ApiRepository {
 
     private val retrofit by lazy {
         val client = OkHttpClient.Builder().apply {
-                val interceptor = HttpLoggingInterceptor()
-                interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-                addInterceptor(interceptor) }.build()
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+            addInterceptor(interceptor)
+        }.build()
         Retrofit.Builder().baseUrl(url)
             .addConverterFactory(GsonConverterFactory.create(gsonFormat))
             .client(client)
+            .addCallAdapterFactory(ServiceResponseCallAdapterFactory())
             .build()
     }
 

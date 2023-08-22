@@ -1,6 +1,5 @@
 package com.sunnyweather.android.ui.vm
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
@@ -8,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.sunnyweather.android.R
 import com.sunnyweather.android.logic.model.Place
 import com.sunnyweather.android.logic.model.Weather
-import com.sunnyweather.android.logic.reporstry.HttpRepository
+import com.sunnyweather.android.logic.network.HttpRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
