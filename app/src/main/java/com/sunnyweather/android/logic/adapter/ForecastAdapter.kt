@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sunnyweather.android.databinding.ItemForecastBinding
 import com.sunnyweather.android.logic.model.DailyWeatherResponseBean
 
-
 class ForecastAdapter(var weatherList: List<DailyWeatherResponseBean.Skycon>, var temperatureList: List<DailyWeatherResponseBean.Temperature>) :
     RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -17,7 +16,6 @@ class ForecastAdapter(var weatherList: List<DailyWeatherResponseBean.Skycon>, va
                 false
             )
         )
-
     }
 
     override fun getItemCount(): Int = weatherList.size

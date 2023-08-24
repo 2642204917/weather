@@ -21,8 +21,6 @@ class WeatherViewModel : BaseViewModel() {
     private val weatherMutableLiveData = MutableLiveData<Weather>()
     val weatherLiveData: LiveData<Weather> = weatherMutableLiveData
     val isRefreshing = MutableLiveData<Boolean>()
-
-
     fun refreshWeather() {
         isRefreshing.value = true
         viewModelScope.launch {

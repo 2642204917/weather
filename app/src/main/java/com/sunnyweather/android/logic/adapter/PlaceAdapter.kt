@@ -17,7 +17,6 @@ class PlaceAdapter(var placeList: List<Place>) : RecyclerView.Adapter<PlaceAdapt
                 false
             )
         )
-
     }
 
     override fun getItemCount(): Int = placeList.size

@@ -1,8 +1,6 @@
 package com.sunnyweather.android.logic.model
 
 import com.google.gson.annotations.SerializedName
-import java.util.Date
-
 
 data class DailyWeatherResponseBean(val daily: Daily) {
 

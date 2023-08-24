@@ -3,5 +3,8 @@
 
     <attr name="icon_color" format="color" />
     <attr name="img_view_tint" format="color" />
+    <attr name="colorHeaderSearch" format="color" />
+    <attr name="colorOnHeaderSearch" format="color" />
+
 
 </resources>

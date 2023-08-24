@@ -5,7 +5,6 @@ import androidx.annotation.IdRes
 import androidx.annotation.MainThread
 import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavOptions
 import com.kunminx.architecture.domain.message.MutableResult

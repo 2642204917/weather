@@ -9,26 +9,63 @@
             type="com.sunnyweather.android.ui.vm.PlaceViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="?android:colorBackground">
 
-        <com.google.android.material.textfield.TextInputEditText
+
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/search_place"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/searchview_bg"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:paddingHorizontal="@dimen/search_padding_horizontal_10"
-            android:text="@={placeVM.query}"
-            app:query="@{placeVM::query}" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:cardBackgroundColor="?attr/colorHeaderSearch"
+            app:cardCornerRadius="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.None">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/searchview_bg"
+                app:boxBackgroundMode="none"
+                app:hintEnabled="false"
+                >
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:hint="@string/hint_add_address"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:paddingVertical="8dp"
+                    android:paddingHorizontal="10dp"
+                    android:singleLine="true"
+                    android:text="@={placeVM.query}"
+                    android:textColor="?attr/colorOnHeaderSearch"
+                    android:textColorHint="?attr/colorOnHeaderSearch"
+                    app:query="@{placeVM::query}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/place_rv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-    </LinearLayout>
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_place" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

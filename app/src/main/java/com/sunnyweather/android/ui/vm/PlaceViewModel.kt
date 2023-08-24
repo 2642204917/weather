@@ -31,6 +31,7 @@ class PlaceViewModel : BaseViewModel() {
         HttpRepository.startQuery(queryStr).onSuccess {
             _placeList.value = it
         }.onFailure {
+            Log.d("TAG", "startQuery: +$it")
             showToast(R.string.query_fail)
         }
 

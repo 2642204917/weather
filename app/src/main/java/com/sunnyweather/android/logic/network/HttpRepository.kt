@@ -54,8 +54,8 @@ object HttpRepository : ApiRepository {
         return place.also { placeMutableData.value = place }
     }
 
-    suspend fun startQuery(query: String) = runCatching {
-        httpService.searchPlaces(query).places
+    suspend fun startQuery(query: String):Result<List<Place>> = runCatching {
+        httpService.searchPlaces(query).places!!
     }
 
     suspend fun savePlace(place: Place): Result<Boolean> = runCatching {
@@ -69,14 +69,14 @@ object HttpRepository : ApiRepository {
         httpService.realTime(
             placeLiveData.value!!.location.lng.toString(),
             placeLiveData.value!!.location.lat.toString()
-        ).result
+        ).result!!
     }
 
     suspend fun dailyWeather(): Result<DailyWeatherResponseBean> = runCatching {
         httpService.dailyWeather(
             placeLiveData.value!!.location.lng.toString(),
             placeLiveData.value!!.location.lat.toString()
-        ).result
+        ).result!!
     }
 }
 

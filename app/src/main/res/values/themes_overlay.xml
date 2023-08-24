@@ -3,6 +3,7 @@
 
     <style name="Base.Theme.OverLay" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="imageButtonStyle">@style/Widget.My.imageButtonStyle</item>
+        <item name="materialCardViewStyle">@style/Widget.My.CardView</item>
     </style>
 
     <style name="icon_imageView" parent="">
@@ -11,5 +12,11 @@
 
     <style name="Widget.My.imageButtonStyle" parent="">
         <item name="tint">?attr/img_view_tint</item>
+    </style>
+
+    <style name="Widget.My.CardView" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">?android:attr/colorBackgroundFloating</item>
+        <item name="cardElevation">0.12dp</item>
+        <item name="cardCornerRadius">4dp</item>
     </style>
 </resources>

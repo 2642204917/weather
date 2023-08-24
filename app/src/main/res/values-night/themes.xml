@@ -2,6 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Sunnyweather" parent="Base.Theme.OverLay">
         <item name="icon_color">@color/white</item>
+        <item name="android:textColorPrimary">#EBE6ED</item>
         <item name="img_view_tint">@color/white</item>
+        <item name="colorHeaderSearch">#2196F3</item>
+        <item name="colorOnHeaderSearch">@color/white</item>
     </style>
 </resources>

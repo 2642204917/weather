@@ -8,8 +8,7 @@ import androidx.navigation.NavOptions
 import com.sunnyweather.android.ui.base.BaseFragment
 import java.lang.ref.WeakReference
 
-sealed class ContextEvent {
-}
+sealed class ContextEvent
 
 
 data class ShowToast(val text: String, val duration: Int) : ContextEvent() {
